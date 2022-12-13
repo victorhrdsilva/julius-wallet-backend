@@ -19,6 +19,7 @@ const singIn = async (req, res) => {
         const token = uuid();
         //subset pattern - ou embedded document pattern
 				await db.collection("sessions").insertOne({
+          name: user.name,
 					userId: user._id,
 					token
 				})
