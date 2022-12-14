@@ -9,23 +9,26 @@ const userSchema = joi.object({
 
 let db = await mongo();
 
-const singIn = async (req, res) => {
+const signIn = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await db.collection('users').findOne({ email });
+    const user = await db.collection('users').findOne({ email: email });
 		const passwordIsValid = bcrypt.compareSync(password, user.password)
 
     if(user && passwordIsValid) {
         const token = uuid();
-        //subset pattern - ou embedded document pattern
-				await db.collection("sessions").insertOne({
-          name: user.name,
+
+        await db.collection("sessions").insertOne({
 					userId: user._id,
 					token
 				})
 
-        res.send(token);
+        res.send({
+          token,
+          name: user.name
+        });
     } else {
         res.status(401).send("Email ou/e senha incorretos");
     }
 }
+
