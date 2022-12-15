@@ -1,4 +1,4 @@
-import db from "../database/db.js";
+import db from "../db/db.js";
 
 async function verifySession(req, res, next) {
     const { authorization } = req.headers;
@@ -20,3 +20,5 @@ async function verifySession(req, res, next) {
         return res.status(500).send(error.message);
     }
 }
+
+export {verifySession}

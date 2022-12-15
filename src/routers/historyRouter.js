@@ -1,10 +1,11 @@
 import express from 'express';
-import authorizationMiddleware from '../middlewares/authorization.middleware.js'
+import {getHistory} from '../controllers/historyController.js'
+import {verifySession} from '../middlewares/authorization.middleware.js'
 
 const router = express.Router();
 
-router.use(authorizationMiddleware)
+router.use(verifySession);
 
-router.post('/home', create);
+router.post('/history', getHistory);
 
 export default router;

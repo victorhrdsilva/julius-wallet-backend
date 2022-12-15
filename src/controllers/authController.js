@@ -1,4 +1,5 @@
 import joi from 'joi';
+import bcrypt from 'bcrypt';
 
 import mongo from '../db/db.js';
 
@@ -21,7 +22,7 @@ const create = async (req, res) => {
       password
     };
     
-    const validation = userSchema.validate(message, {
+    const validation = userSchema.validate(user, {
       abortEarly: false,
     });
     
