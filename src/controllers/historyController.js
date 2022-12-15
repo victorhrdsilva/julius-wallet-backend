@@ -10,6 +10,8 @@ const getHistory = async (req, res) => {
 
     if (user) {
         
+    } else {
+        
     }
 
 }
