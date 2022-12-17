@@ -13,6 +13,14 @@ let db = await mongo();
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
+  const validation = userSchema.validate({ email, password }, {
+    abortEarly: false,
+  });
+
+  if (validation.error) {
+    const errors = validation.error.details.map((detail) => detail.message);
+    return res.status(400).send(errors);
+  };
 
   try {
     const user = await db.collection('users').findOne({ email: email });

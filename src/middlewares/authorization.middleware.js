@@ -1,4 +1,5 @@
-import db from "../db/db.js";
+import mongo from '../db/db.js';
+let db = await mongo();
 
 async function verifySession(req, res, next) {
     const { authorization } = req.headers;
@@ -8,9 +9,9 @@ async function verifySession(req, res, next) {
     }
 
     try {
-        const session = await db.collection("sessions").findOne({ token });
-        if (session) {
-            return res.sendStatus(400);
+        const session = await db.collection("sessions").findOne({ token: token });
+        if (!session) {
+            return res.sendStatus(401);
         }
 
         res.locals.session = session;
