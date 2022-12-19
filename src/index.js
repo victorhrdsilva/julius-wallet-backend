@@ -24,4 +24,4 @@ app.use(userRouter);
 // History router
 app.use(historyRouter);
 
-app.listen(process.env.PORT || 3000, () => console.log(`App running in port: ${procss.env.PORT}`));
+app.listen(process.env.PORT || 3000, () => console.log(`App running in port: ${process.env.PORT}`));
