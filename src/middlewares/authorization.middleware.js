@@ -11,7 +11,7 @@ async function verifySession(req, res, next) {
     try {
         const session = await db.collection("sessions").findOne({ token: token });
         if (!session) {
-            return res.sendStatus(401);
+            return res.send("caiu aqui").status(401);
         }
 
         res.locals.session = session;

@@ -22,7 +22,7 @@ const getHistory = async (req, res) => {
         if (existHistory) {
             return res.status(200).send(existHistory.transactions);
         };
-        return res.sendStatus(204);
+        return res.send([]).status(204);
     } catch (error) {
         res.status(500).send(error.message);
     };
